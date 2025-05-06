@@ -25,4 +25,9 @@ public class ContatoController : Controller
 
     }
 
+    public IActionResult ApagarConfirmacao()
+    {
+        return View();
+    }
+
 }

@@ -9,9 +9,6 @@ namespace ControleDeContatos.Controllers
 
         public IActionResult Index()
         {
-           
-           
-
             return View();
         }
 
