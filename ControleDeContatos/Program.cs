@@ -1,4 +1,14 @@
+using ControleDeContatos.Data;
+using ControleDeContatos.Repositorio;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+
+// Add the DbContext and configure the connection string of the database
+builder.Services.AddDbContext<BancoContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("pefteste")));
+
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
