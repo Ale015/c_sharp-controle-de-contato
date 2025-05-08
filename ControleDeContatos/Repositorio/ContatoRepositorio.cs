@@ -50,9 +50,18 @@ public class ContatoRepositorio : IContatoRepositorio
 
     public ContatoModel Editar(ContatoModel contato)
     {
-        _bancoContext.Contatos.Update(contato);
+
+        ContatoModel contatoDB = BuscarPorId(contato.Id);
+
+        if (contatoDB == null) throw new System.Exception("Houve um erro na atualização do contato!");
+
+        contatoDB.Nome = contato.Nome;
+        contatoDB.Email = contato.Email;
+        contatoDB.Celular = contato.Celular;
+
+        _bancoContext.Contatos.Update(contatoDB);
         _bancoContext.SaveChanges();
-        return contato;
+        return contatoDB;
     }
 
 

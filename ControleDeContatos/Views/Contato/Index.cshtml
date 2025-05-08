@@ -14,7 +14,10 @@
         Listagem de Contatos
     </h1>
 
-
+    @if(ViewBag.MensagemErro  != null)
+    {
+        <h1>@ViewBag.MensagemErro</h1>
+    }
 
     <table class="table">
         <thead>

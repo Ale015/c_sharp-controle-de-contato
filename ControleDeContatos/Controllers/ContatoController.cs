@@ -15,6 +15,12 @@ public class ContatoController : Controller
     public IActionResult Index()
     {
         List<ContatoModel> contatos = _contatoRepositorio.BuscarContatos();
+
+        if (TempData["MensagemErro"]  != null)
+        {
+            ViewBag.MensagemErro = TempData["MensagemErro"];
+        }
+
         return View(contatos);
     }
     
@@ -22,6 +28,17 @@ public class ContatoController : Controller
     {
         return View(new ContatoModel { });
     }
+
+
+    [HttpPost]
+    public IActionResult Criar(ContatoModel contato)
+    {
+        // Chama o método Adicionar
+        _contatoRepositorio.Adicionar(contato);
+        // Ao final do Post, redireciona para o Index de Contato
+        return RedirectToAction("Index");
+    }
+
     public IActionResult Editar(int id)
     {
         ContatoModel contato = _contatoRepositorio.BuscarPorId(id);
@@ -40,26 +57,29 @@ public class ContatoController : Controller
     public IActionResult ApagarConfirmacao(int id)
     {
         ContatoModel contato = _contatoRepositorio.BuscarPorId(id);
+
+        if (contato == null)
+        {
+            TempData["MensagemErro"] = "Houve um erro ao buscar o contato!";
+
+            return RedirectToAction("Index");
+        }
+
         return View(contato);
     }
 
     public IActionResult Apagar(int id)
     {
         ContatoModel contato = _contatoRepositorio.BuscarPorId(id);
+        
+        // Deveria implementar no Repository mas fiz aqui.
+        if(contato == null)
+        {
+            return RedirectToAction("Index");
+        }
+        
+        
         _contatoRepositorio.Apagar(contato);
         return RedirectToAction("Index");
     }
-
-
-
-
-    [HttpPost]
-    public IActionResult Criar(ContatoModel contato)
-    {
-        // Chama o método Adicionar
-        _contatoRepositorio.Adicionar(contato);
-        // Ao final do Post, redireciona para o Index de Contato
-        return RedirectToAction("Index");
-    }
-
 }
