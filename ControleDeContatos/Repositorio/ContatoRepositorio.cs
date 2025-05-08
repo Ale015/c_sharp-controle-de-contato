@@ -15,6 +15,23 @@ public class ContatoRepositorio : IContatoRepositorio
         _bancoContext = bancoContext;
     }
 
+
+    // Listar todos os contatos da tabela Contatos
+    public List<ContatoModel> BuscarContatos() 
+    {
+        return _bancoContext.Contatos.ToList();
+
+    }
+
+
+    // Buscar Contato por Id
+    public ContatoModel BuscarPorId(int id) 
+    {
+       return _bancoContext.Contatos.FirstOrDefault(contato => contato.Id == id);
+    }
+
+
+
     // Implementação do Contrato
     public ContatoModel Adicionar(ContatoModel contato) 
     {
@@ -28,4 +45,27 @@ public class ContatoRepositorio : IContatoRepositorio
         return contato;
 
     }
+
+
+
+    public ContatoModel Editar(ContatoModel contato)
+    {
+        _bancoContext.Contatos.Update(contato);
+        _bancoContext.SaveChanges();
+        return contato;
+    }
+
+
+
+    public void Apagar(ContatoModel contato)
+    {
+
+        _bancoContext.Contatos.Remove(contato);
+        _bancoContext.SaveChanges();
+
+    }
+
+
+
+
 }

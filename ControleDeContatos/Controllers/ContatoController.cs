@@ -14,28 +14,44 @@ public class ContatoController : Controller
 
     public IActionResult Index()
     {
-
-        return View();
-
+        List<ContatoModel> contatos = _contatoRepositorio.BuscarContatos();
+        return View(contatos);
     }
     
-    public IActionResult Criar( )
+    public IActionResult Criar()
     {
-
-        return View();
-
+        return View(new ContatoModel { });
     }
-    public IActionResult Editar()
+    public IActionResult Editar(int id)
     {
-
-        return View();
-
+        ContatoModel contato = _contatoRepositorio.BuscarPorId(id);
+        return View(contato);
     }
 
-    public IActionResult ApagarConfirmacao()
+    [HttpPost]
+    public IActionResult Editar(ContatoModel contato)
     {
-        return View();
+        ContatoModel contatoEditado = _contatoRepositorio.Editar(contato);
+
+        return RedirectToAction("Index");
+
     }
+
+    public IActionResult ApagarConfirmacao(int id)
+    {
+        ContatoModel contato = _contatoRepositorio.BuscarPorId(id);
+        return View(contato);
+    }
+
+    public IActionResult Apagar(int id)
+    {
+        ContatoModel contato = _contatoRepositorio.BuscarPorId(id);
+        _contatoRepositorio.Apagar(contato);
+        return RedirectToAction("Index");
+    }
+
+
+
 
     [HttpPost]
     public IActionResult Criar(ContatoModel contato)
