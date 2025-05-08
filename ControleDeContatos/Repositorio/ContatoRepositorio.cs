@@ -1,5 +1,6 @@
 ﻿using ControleDeContatos.Data;
 using ControleDeContatos.Models;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 
 namespace ControleDeContatos.Repositorio;
@@ -35,6 +36,7 @@ public class ContatoRepositorio : IContatoRepositorio
     // Implementação do Contrato
     public ContatoModel Adicionar(ContatoModel contato) 
     {
+
         // Insert no Banco
         _bancoContext.Contatos.Add(contato);
 

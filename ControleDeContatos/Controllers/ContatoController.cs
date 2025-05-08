@@ -16,11 +16,6 @@ public class ContatoController : Controller
     {
         List<ContatoModel> contatos = _contatoRepositorio.BuscarContatos();
 
-        if (TempData["MensagemErro"]  != null)
-        {
-            ViewBag.MensagemErro = TempData["MensagemErro"];
-        }
-
         return View(contatos);
     }
     
@@ -33,6 +28,12 @@ public class ContatoController : Controller
     [HttpPost]
     public IActionResult Criar(ContatoModel contato)
     {
+
+        if (!ModelState.IsValid)
+        {        
+            return View(contato);
+        }
+
         // Chama o método Adicionar
         _contatoRepositorio.Adicionar(contato);
         // Ao final do Post, redireciona para o Index de Contato
@@ -60,8 +61,6 @@ public class ContatoController : Controller
 
         if (contato == null)
         {
-            TempData["MensagemErro"] = "Houve um erro ao buscar o contato!";
-
             return RedirectToAction("Index");
         }
 

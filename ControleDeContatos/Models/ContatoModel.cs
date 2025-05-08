@@ -15,16 +15,21 @@ public class ContatoModel
     public int Id { get; set; }
 
 
-    [Required]
+    [Required(ErrorMessage = "O Nome necessita ser informado.")]
     [StringLength(50)]
     public string Nome { get; set; }
 
-    [Required]
-    [EmailAddress]
+    [Required(ErrorMessage = "O Email deve ser informado.")]
+    [EmailAddress(ErrorMessage ="Por favor informe um e-mail válido.")]
     public string Email { get; set; }
 
-    [Required]
+    [Required(ErrorMessage = "Por favor informe um número do telefone")]
+    [Phone(ErrorMessage = "O número de celular informado não é válido.")]    
     public string Celular { get; set; }
+
+
+
+
 
     //public static ContatoModel Create()
     //{
