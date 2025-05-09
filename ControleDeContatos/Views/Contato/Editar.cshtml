@@ -20,16 +20,19 @@
     <div class="mb-3">
         <label for="nome" class="form-label">Nome</label>
         <input type="text" asp-for="Nome" class=" form-control" value="@Model.Nome" placeholder="Digite o nome do contato">
+        <span asp-validation-for="Nome" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
         <label for="email" class="form-label">E-mail</label>
-        <input type="text" asp-for="Celular" class=" form-control" value="@Model.Email"  placeholder="Informe o email">
+        <input type="text" asp-for="Email" class=" form-control" value="@Model.Email"  placeholder="Informe o email">
+        <span asp-validation-for="Email" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
         <label for="celular" class="form-label">Celular</label>
-        <input type="text" asp-for="Email" class=" form-control" value="@Model.Celular"  placeholder="Digite o número de contato">
+        <input type="text" asp-for="Celular" class=" form-control" value="@Model.Celular"  placeholder="Digite o número de contato">
+        <span asp-validation-for="Celular" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-primary">Salvar</button>

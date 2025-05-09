@@ -49,8 +49,16 @@ public class ContatoController : Controller
     [HttpPost]
     public IActionResult Editar(ContatoModel contato)
     {
-        ContatoModel contatoEditado = _contatoRepositorio.Editar(contato);
 
+        if (!ModelState.IsValid)
+        {
+            return View(contato);
+            
+
+        }
+
+        ContatoModel contatoEditado = _contatoRepositorio.Editar(contato);
+        
         return RedirectToAction("Index");
 
     }
